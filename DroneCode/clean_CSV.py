@@ -44,6 +44,23 @@ def clean_CSV(full_name, old_extension):    # extension .bin or .ulg of original
 
     return(df, cleanCSVName)
 
+def clean_CSV_throttle(full_name, old_extension):
+
+    if old_extension=='bin' or old_extension=='BIN':
+
+        csvName=full_name[:len(full_name)-4]+'_Throttle'+'.csv'
+        colnames=['timestamp','ThI','ThO','ThH','Alt']
+        print(csvName)
+
+    else:
+        print('Error procesing .csv file. File removed or modified !!!')
+        sys.exit()
+
+    df_throttle=pandas.read_csv(csvName,usecols=colnames) # df is of the type DataFrame.
+
+    return(df_throttle)
+
+
 if __name__=="__main__":
 
     clean=input('Do you want to produce a clean CSV file? (y/n)')
@@ -60,5 +77,5 @@ if __name__=="__main__":
     else:
         print("Bye, bye my little birdy...")
         sys.exit()
-        
+
     print(gps_dataframe)
