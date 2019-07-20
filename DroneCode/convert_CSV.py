@@ -24,6 +24,18 @@ def convert_CSV(full_name, extension):
     else:
         print("File with wrong extension, run program again :-)")
         sys.exit()
+
+def convert_CSV_throttle(full_name, extension):
+
+    if extension=='bin' or extension=='BIN':
+# I force mavlogdump to store output file into same folder as original file,
+# with same name but extension .csv
+        myCmd='mavlogdump.py --format csv --types CTUN '+full_name+'>'+full_name[:len(full_name)-4]+'_Throttle'+'.csv'
+        os.system(myCmd)
+    else:
+        print("File with wrong extension, run program again :-)")
+        sys.exit()
+
 # ulog2csv and mavlogdump are python script text executables, so I just return
 # them form the bash using os.system()function.
 

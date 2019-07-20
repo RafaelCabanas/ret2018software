@@ -54,6 +54,40 @@ def plot_trajectory3D_ENU(time_coordinates):        # input=numpyArray
     ax.set_aspect('equal', adjustable='box')
     plt.show()
 
+def plot_throttle(time_throttle_df):        # input=dataFrame, columns ['timestamp','ThI','ThO','ThH','Alt']
+
+    time_throttle_array=time_throttle_df.to_numpy(copy=True)    # transform dataFrame into numpy-arrays
+
+    time_throttle_array[:,0]=time_throttle_array[:,0]-time_throttle_array[0,0] # Origin of time at first recorded time in file.
+
+    print(time_throttle_df)
+    print(time_throttle_array)
+
+    fig, axs = plt.subplots(2, 2)
+    axs[0,0].plot(time_throttle_array[:,0],time_throttle_array[:,2])
+#    axs[0].set_xlim(0, 2)
+    axs[0,0].set_xlabel('time (s)')
+    axs[0,0].set_ylabel('Th0')
+    axs[0,0].grid(True)
+
+    axs[0,1].plot(time_throttle_array[:,0],time_throttle_array[:,1])
+    axs[0,1].set_xlabel('time (s)')
+    axs[0,1].set_ylabel('ThI')
+    axs[0,1].grid(True)
+
+    axs[1,0].plot(time_throttle_array[:,0],time_throttle_array[:,3])
+    axs[1,0].set_xlabel('time (s)')
+    axs[1,0].set_ylabel('ThH')
+    axs[1,0].grid(True)
+
+    axs[1,1].plot(time_throttle_array[:,0],time_throttle_array[:,4])
+    axs[1,1].set_xlabel('time (s)')
+    axs[1,1].set_ylabel('Alt')
+    axs[1,1].grid(True)
+
+    fig.tight_layout()
+    plt.show()
+
 
 if __name__ == '__main__':
 
